@@ -1,18 +1,20 @@
 /* Initializing Parse */
 Parse.initialize(parseClientID, parseJavascriptKey);
 
-var upgradeBrowser = function () {
-  alert("It seems like your browser is not up-to-date to run NowSpeak");
+var requirementsOk = function() {
+  if (!('webkitSpeechRecognition' in window)) {
+    alert(i18n.error_requirements_speech);
+    return false;
+  }
+  return true;
 }
 var recordingError = function (error, message) {
   alert("Error while recording: "+error+" / "+message);
 }
 
-/* Initializing the Speech Recognition API */
-if (!('webkitSpeechRecognition' in window)) {
-  upgradeBrowser();
-}
-else {
+if (requirementsOk) {
+
+  /* Initializing the Speech Recognition API */
   var recognition = new webkitSpeechRecognition();
   recognition.continuous = true;
   recognition.interimResults = true;
@@ -39,8 +41,9 @@ else {
     currentlyRecording = false;
   }
 
-  /* Initializing the DOM to communicate with the Speech Recognition API */
   $(function(){
+
+    /* Initializing the DOM to communicate with the Speech Recognition API */
     $('button').click(function(){
       if (!currentlyRecording) {
         recognition.start();
@@ -49,6 +52,11 @@ else {
         recognition.stop();
       }
     });
+
+    /* Setting the bits of interface in place */
+    $('#bottom-bar').html(i18n.bottom_bar_hold_space);
+    $('#comment-icon').html(i18n.comment_invite);
+
   });
 
 }

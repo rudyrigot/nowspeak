@@ -1,0 +1,4 @@
+var GUItest = function(){
+}
+
+$(GUItest);
