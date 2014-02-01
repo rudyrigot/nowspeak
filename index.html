@@ -10,6 +10,7 @@
     <link rel="stylesheet" href="css/styles.css">
     <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
     <script type="text/javascript" src="http://www.parsecdn.com/js/parse-1.2.16.min.js"></script>
+    <script type="text/javascript" src="js/underscore-min.js"></script>
     <script type="text/javascript" src="js/i18n.en.js"></script>
     <script type="text/javascript" src="js/nowspeak-configuration.js"></script>
     <script type="text/javascript" src="js/parse-models.js"></script>
@@ -21,7 +22,6 @@
     <div id="spacebar-listening" tabindex="1">
       <main>
         <div id="messages">
-          <button>Record</button>
           <div id="results"></div>
         </div>
         <div id="bottom-bar">
@@ -33,6 +33,28 @@
     <div id="comment-area">
       <a href="#" id="comment-icon"></a>
     </div>
-  </body>
+
+    <!-- Templates -->
+
+    <script type="text/template" id="login-signup">
+      <div id="login-signup-form">
+        <h3><%= i18n.loginsignup_welcome_message %></h3>
+        <div><%= i18n.loginsignup_welcome_lede %></div>
+        <hr>
+        <h4><%= i18n.loginsignup_signup_title %></h4>
+        <form id="signup-form">
+          <p><input type="text" placeholder="<%= i18n.loginsignup_username_field %>" id="signup_username"></p>
+          <p><input type="password" placeholder="<%= i18n.loginsignup_password_field %>" id="signup_password"></p>
+          <p><button type="submit"><%= i18n.loginsignup_signup_button %></button></p>
+        </form>
+        <hr>
+        <h4><%= i18n.loginsignup_login_title %></h4>
+        <form id="login-form">
+          <p><input type="text" placeholder="<%= i18n.loginsignup_username_field %>" id="login_username"></p>
+          <p><input type="password" placeholder="<%= i18n.loginsignup_password_field %>" id="login_password"></p>
+          <p><button type="submit"><%= i18n.loginsignup_login_button %></button></p>
+        </form>
+      </div>
+    </script>
 
 </html>

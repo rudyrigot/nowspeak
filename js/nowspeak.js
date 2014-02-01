@@ -19,7 +19,13 @@ var recordingError = function (error) {
   alert(i18n.error_recording+": "+error);
 }
 
-if (requirementsOk) {
+/* Allows to get the bottom bar back to its default message */
+var idleBottomBar = function(){
+  $('#bottom-bar').html(keepSpacebarPressed ? i18n.bottombar_hold_space : i18n.bottombar_hit_space);
+}
+
+/* Initialization of all the various needed stuff */
+var initApp = function() {
 
   /* Initializing the Speech Recognition API */
   var recognition = new webkitSpeechRecognition();
@@ -45,11 +51,11 @@ if (requirementsOk) {
   recognition.onerror = function(event) {
     recordingError(event.error);
     currentlyRecording = false;
-    $('#bottom-bar').html(keepSpacebarPressed ? i18n.bottombar_hold_space : i18n.bottombar_hit_space);
+    idleBottomBar();
   }
   recognition.onend = function() {
     currentlyRecording = false;
-    $('#bottom-bar').html(keepSpacebarPressed ? i18n.bottombar_hold_space : i18n.bottombar_hit_space);
+    idleBottomBar();
   }
 
   $(function(){
@@ -74,7 +80,7 @@ if (requirementsOk) {
     }
 
     /* Setting the bits of interface in place */
-    $('#bottom-bar').html(keepSpacebarPressed ? i18n.bottombar_hold_space : i18n.bottombar_hit_space);
+    idleBottomBar();
     $('#comment-icon').html(i18n.comment_invite);
 
     /* And setting the focus, for the glory to happen */
@@ -84,13 +90,43 @@ if (requirementsOk) {
 
 }
 
-// var TestObject = Parse.Object.extend("TestObject");
-// var testObject = new TestObject();
-// testObject.save({foo: "bar"}, {
-//   success: function(object) {
-//     $(".success").show();
-//   },
-//   error: function(model, error) {
-//     $(".error").show();
-//   }
-// });
+/* Le login / signup form */
+
+var showLoginSignupForm = function(){
+  $('aside').html(_.template($('#login-signup').html(), {}));
+  $('#signup-form').on("submit", function(e){
+    var user = new Parse.User();
+    user.set("username", $('#signup_username').val());
+    user.set("password", $('#signup_password').val());
+    user.set("firstSeen", new Date());
+    user.signUp(null, {
+      success: function(user) {
+        initApp();
+      },
+      error: function(user, error) {
+        alert("Error: " + error.code + " " + error.message);
+      }
+    });
+    e.preventDefault();
+  });
+  $('#login-form').on("submit", function(e){
+    var user = new Parse.User();
+    Parse.User.logIn($('#login_username').val(), $('#login_password').val(), {
+      success: function(user) {
+        initApp();
+      },
+      error: function(user, error) {
+        alert("Error: " + error.code + " " + error.message);
+      }
+    });
+    e.preventDefault();
+  });
+}
+
+if (requirementsOk()) {
+  var currentUser = Parse.User.current();
+  if (currentUser) { initApp(); }
+  else {
+    $(showLoginSignupForm);
+  }
+}

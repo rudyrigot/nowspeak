@@ -74,11 +74,37 @@ main {
     animation-iteration-count: infinite;
 }
 
+/* Aside */
+aside {
+	padding: 10px;
+}
+
+/* Aside: login / signup form */
+#login-signup-form {
+	text-align: center;
+}
+#login-signup-form div {
+	margin-bottom: 50px;
+}
+#login-signup-form input {
+	width: 150px;
+}
+#login-signup-form p.button {
+	text-align: center;
+}
+#login-signup-form h4 {
+	font-weight: normal;
+	font-style: italic;
+	font-size: 0.8em;
+	margin: -25px 35px 0;
+	background-color: #fafafa;
+}
+
 /* Comment area */
 #comment-area {
 	position:absolute;
 	bottom: 10px;
-	right: 210px;
+	right: 230px;
 	padding: 5px 10px;
 	background-color: #e0e0e0;
 	border-radius: 10px;
