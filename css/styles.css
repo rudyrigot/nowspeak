@@ -78,6 +78,11 @@ main {
 aside {
 	padding: 10px;
 }
+aside #logout {
+	font-size: 0.8em;
+	text-align: right;
+	display: block;
+}
 
 /* Aside: login / signup form */
 #login-signup-form {
@@ -98,6 +103,24 @@ aside {
 	font-size: 0.8em;
 	margin: -25px 35px 0;
 	background-color: #fafafa;
+}
+
+/* Aside : create or join a conversation */
+#create-or-join-conversation-form h3 {
+	text-align: center;
+}
+#create-or-join-conversation-form h4 {
+	text-align: center;
+	font-size: 0.9em;
+}
+#create-or-join-conversation-form #create-conversation-form {
+	text-align: center;
+}
+#create-or-join-conversation-form #create-conversation-form input {
+	width: 150px;
+}
+#create-or-join-conversation-form ul {
+	font-size: 0.9em;
 }
 
 /* Comment area */

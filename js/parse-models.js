@@ -1,4 +1,8 @@
 var ConfCall = Parse.Object.extend("ConfCall", {
+	defaults: {
+		"public" : true,
+		"name" : "bistro"
+	}
 });
 
 var Message = Parse.Object.extend("Message", {
