@@ -1,4 +1,0 @@
-var GUItest = function(){
-}
-
-$(GUItest);
