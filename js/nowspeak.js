@@ -1,6 +1,9 @@
 /* Initializing Parse */
 Parse.initialize(parseClientID, parseJavascriptKey);
 
+/* Keeping the recognition engine in a global variable somewhere */
+var recognition;
+
 /* Checking if all that's required to boot is there */
 var requirementsOk = function() {
   if (!('webkitSpeechRecognition' in window)) {
@@ -21,7 +24,7 @@ var recordingError = function (error) {
 
 /* Allows to get the bottom bar back to its default message */
 var idleBottomBar = function(){
-  $('#bottom-bar').html(keepSpacebarPressed ? i18n.bottombar_hold_space : i18n.bottombar_hit_space);
+  $('#bottom-bar').html((keepSpacebarPressed ? i18n.bottombar_hold_space : i18n.bottombar_hit_space)+ " ("+recognition.lang+")");
 }
 
 /* Le login / signup form */
@@ -33,6 +36,7 @@ var showLoginSignupForm = function(){
     user.set("username", $('#signup_username').val());
     user.set("password", $('#signup_password').val());
     user.set("firstSeen", new Date());
+    user.set("lang", lang);
     user.signUp(null, {
       success: function(user) {
         initApp();
@@ -72,10 +76,10 @@ var showCreateOrJoinConversation = function(){
 var initApp = function() {
 
   /* Initializing the Speech Recognition API */
-  var recognition = new webkitSpeechRecognition();
+  recognition = new webkitSpeechRecognition();
   recognition.continuous = true;
   recognition.interimResults = true;
-  recognition.lang = "en";
+  recognition.lang = lang;
   var currentlyRecording = false;
 
   recognition.onstart = function() {
@@ -138,7 +142,10 @@ var initApp = function() {
 
 if (requirementsOk()) {
   var currentUser = Parse.User.current();
-  if (currentUser) { initApp(); }
+  if (currentUser) {
+    if (currentUser.get("lang")) lang = currentUser.get("lang");
+    initApp();
+  }
   else {
     $(showLoginSignupForm);
   }
