@@ -1,5 +1,3 @@
-/* Initializing Parse */
-Parse.initialize(parseClientID, parseJavascriptKey);
 
 /* Keeping the recognition engine in a global variable somewhere */
 var recognition;
@@ -29,47 +27,8 @@ var idleBottomBar = function(){
 
 /* Le login / signup form */
 
-var showLoginSignupForm = function(){
-  $('aside').html(_.template($('#login-signup').html(), {}));
-  $('#signup-form').on("submit", function(e){
-    var user = new Parse.User();
-    user.set("username", $('#signup_username').val());
-    user.set("password", $('#signup_password').val());
-    user.set("firstSeen", new Date());
-    user.set("lang", lang);
-    user.signUp(null, {
-      success: function(user) {
-        initApp();
-      },
-      error: function(user, error) {
-        alert("Error: " + error.code + " " + error.message);
-      }
-    });
-    e.preventDefault();
-  });
-  $('#login-form').on("submit", function(e){
-    var user = new Parse.User();
-    Parse.User.logIn($('#login_username').val(), $('#login_password').val(), {
-      success: function(user) {
-        initApp();
-      },
-      error: function(user, error) {
-        alert("Error: " + error.code + " " + error.message);
-      }
-    });
-    e.preventDefault();
-  });
-}
-
-/* Binds the logOut link in the aside (needs to be called every time!) */
-var bindLogOut = function() {
-  $('#logout').click(Parse.User.logOut);
-}
-
-/* Renders the panel to create or join conversations in the aside */
-var showCreateOrJoinConversation = function(){
-  $('aside').html(_.template($('#create-or-join-conversation').html(), {}));
-  bindLogOut();
+var showWelcome = function(){
+  $('aside').html(_.template($('#welcome').html(), {}));
 }
 
 /* Initialization of all the various needed stuff */
@@ -126,9 +85,6 @@ var initApp = function() {
       });
     }
 
-    /* Showing the aside invitation to either join a conversation, or create one */
-    showCreateOrJoinConversation();
-
     /* Setting the bits of interface in place */
     idleBottomBar();
     $('#comment-icon').html(i18n.comment_invite);
@@ -140,13 +96,4 @@ var initApp = function() {
 
 }
 
-if (requirementsOk()) {
-  var currentUser = Parse.User.current();
-  if (currentUser) {
-    if (currentUser.get("lang")) lang = currentUser.get("lang");
-    initApp();
-  }
-  else {
-    $(showLoginSignupForm);
-  }
-}
+if (requirementsOk()) initApp();
