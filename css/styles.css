@@ -130,6 +130,10 @@ aside #welcome #seepubliclist {
 aside #welcome #seepubliclist li span {
 	font-size: 0.7em;
 }
+aside #welcome #seepubliclist li span.ago {
+	color: #555555;
+	font-style: italic;
+}
 aside #welcome #seepubliclist li a {
 	color: black;
 	text-decoration: none;

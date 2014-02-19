@@ -1,3 +1,7 @@
+/* Firebase initialization */
+var firebaseRootRef = new Firebase(firebaseEndpoint);
+
+var currentRoomRef;
 
 /* Keeping the recognition engine in a global variable somewhere */
 var recognition;
@@ -48,7 +52,9 @@ var showRoom = function(roomID) {
 var showWelcome = function(){
   $('aside').html(_.template($('#welcome-template').html(), {}));
   $('#newprivatebutton').click(function(e){
-    showRoom(uuid.v1());
+    var roomName = uuid.v1();
+    firebaseRootRef.child('PrivateRooms').child(roomName).set({'name' : roomName, 'created' : new Date().getTime() });
+    showRoom(roomName);
     e.preventDefault();
   });
   $('#newpublicbutton').click(function(e){
@@ -59,14 +65,19 @@ var showWelcome = function(){
     e.preventDefault();
   });
   $('#newpublicform').submit(function(e){
-    showRoom(getSlug($('#newpublicinput').val()));
+    var roomName = getSlug($('#newpublicinput').val());
+    currentRoomRef = Room.update(roomName);
+    showRoom(roomName);
     e.preventDefault();
   });
   $('#seepublicbutton').click(function(e){
-    $('#seepubliclist').empty();
-    ['welcome-room', 'bistro'].forEach(function(item){
-      $('#seepubliclist').append('<li><a href="javascript:showRoom(\''+item+'\')">'+item+'</a> <span>→</span></li>')
-    });
+    if (!$(this).hasClass("already-listening")) {
+      firebaseRootRef.child('Rooms').on('child_added', function(snapshot){
+        var roomName = snapshot.val().name;
+        $('#seepubliclist').append('<li><a href="javascript:currentRoomRef=Room.update(\''+roomName+'\'); showRoom(\''+roomName+'\')">'+roomName+'</a> <span class="ago">('+moment(snapshot.val().latest).fromNow()+')</spam> <span>→</span></li>')
+      })
+    }
+    $(this).addClass("already-listening");
     $(this).addClass("active");
     $('#seepubliclist').slideDown('fast');
     $('#newpublicbutton').removeClass('active');

@@ -27,6 +27,8 @@
     "jquery": "2.1.0",
     "underscore": "1.6.0",
     "node-uuid": "1.4.1",
-    "speakingurl": "~0.8.4"
+    "speakingurl": "~0.8.4",
+    "firebase": "~1.0.6",
+    "moment": "~2.5.1"
   }
 }

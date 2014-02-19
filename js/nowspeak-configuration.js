@@ -1,3 +1,6 @@
+/* Endpoint of the firebase repository to use */
+var firebaseEndpoint = 'https://resplendent-fire-6048.firebaseio.com/';
+
 /* What language will be used in the interface; imitate i18n.en.js to create your own translation */
 var i18n = i18n_en;
 
