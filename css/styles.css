@@ -139,6 +139,26 @@ aside #welcome #seepubliclist li a:hover {
 	text-decoration: underline;
 }
 
+/* Users aside */
+aside #users {
+	font-size: 0.9em;
+}
+aside #users #users-sendurl {
+	margin: 0;
+	font-style: italic;
+}
+aside #users #exit {
+	text-align: right;
+	padding: 0 10px;
+}
+aside #users #exit a {
+	color: black;
+}
+aside #users h3 {
+	text-align: center;
+	margin-top: 50px;
+}
+
 /* Comment area */
 #comment-area {
 	position:absolute;

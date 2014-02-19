@@ -20,6 +20,11 @@ var recordingError = function (error) {
   alert(i18n.error_recording+": "+error);
 }
 
+/* Returning the name of the current conversation room */
+var getRoomName = function() {
+  return (window.location.hash ? window.location.hash.substring(1) : null);
+}
+
 /* Allows to get the bottom bar back to its default message */
 var idleBottomBar = function(){
   $('#bottom-bar').html((keepSpacebarPressed ? i18n.bottombar_hold_space : i18n.bottombar_hit_space)+ " ("+recognition.lang+")");
@@ -27,12 +32,13 @@ var idleBottomBar = function(){
 
 /* Initialization of a room */
 var showRoom = function(roomID) {
+  /* Changing the URL */
+  window.location = '#'+roomID;
+
   /* Setting the bits of interface in place */
   idleBottomBar();
   $('#comment-icon').html(i18n.comment_invite);
-
-  /* Changing the URL */
-  window.location = '#'+roomID;
+  $('aside').html(_.template($('#users-template').html(), {}));
 
   /* And setting the focus, for the glory to happen */
   $('#spacebar-listening').focus();
@@ -53,13 +59,13 @@ var showWelcome = function(){
     e.preventDefault();
   });
   $('#newpublicform').submit(function(e){
-    showRoom($('#newpublicinput').val());
+    showRoom(getSlug($('#newpublicinput').val()));
     e.preventDefault();
   });
   $('#seepublicbutton').click(function(e){
     $('#seepubliclist').empty();
-    ['foo', 'bar'].forEach(function(item){
-      $('#seepubliclist').append('<li><a href="#'+item+'">'+item+'</a> <span>→</span></li>')
+    ['welcome-room', 'bistro'].forEach(function(item){
+      $('#seepubliclist').append('<li><a href="javascript:showRoom(\''+item+'\')">'+item+'</a> <span>→</span></li>')
     });
     $(this).addClass("active");
     $('#seepubliclist').slideDown('fast');
@@ -123,8 +129,8 @@ var initApp = function() {
       });
     }
 
-    if (window.location.hash) {
-      showRoom(window.location.hash.substring(1));
+    if (getRoomName()) {
+      showRoom(getRoomName());
     }
     else {
       showWelcome();

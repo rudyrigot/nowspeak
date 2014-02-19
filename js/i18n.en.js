@@ -18,5 +18,9 @@ var i18n_en = {
 	welcome_nowwhat : 'Now what?',
 	welcome_newprivatebutton : 'New private room',
 	welcome_newpublicbutton : 'New public room',
-	welcome_seepublicbutton : 'See public rooms'
+	welcome_seepublicbutton : 'See public rooms',
+
+	users_sendurl : 'Send the current URL to your friends to invite them!',
+	users_exitroom : 'Exit room',
+	users_title: 'Room: '
 };
