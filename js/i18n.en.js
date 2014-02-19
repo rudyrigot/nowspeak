@@ -13,6 +13,10 @@ var i18n_en = {
 
 	comment_invite : '<big>&#x270e;</big> Send a comment',
 
-	loginsignup_welcome_message : 'Welcome, fellow online conferencist!',
-	loginsignup_welcome_lede : 'Are you also tired of unmanageable conference calls, with a bunch of people struggling with network lag?<br>You\'ve come to the right place!'
+	welcome_title : 'Welcome, fellow online conferencist!',
+	welcome_lede : 'Are you also tired of unmanageable conference calls, with a bunch of people struggling with network lag?<br>You\'ve come to the right place!',
+	welcome_nowwhat : 'Now what?',
+	welcome_newprivatebutton : 'New private room',
+	welcome_newpublicbutton : 'New public room',
+	welcome_seepublicbutton : 'See public rooms'
 };

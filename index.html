@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="css/styles.css">
     <script type="text/javascript" src="bower_components/jquery/dist/jquery.min.js"></script>
     <script type="text/javascript" src="bower_components/underscore/underscore.js"></script>
+    <script type="text/javascript" src="bower_components/node-uuid/uuid.js"></script>
     <script type="text/javascript" src="js/i18n.en.js"></script>
     <script type="text/javascript" src="js/nowspeak-configuration.js"></script>
     <script type="text/javascript" src="js/nowspeak.js"></script>
@@ -33,12 +34,23 @@
 
     <!-- Templates -->
 
-    <script type="text/template" id="welcome">
-      <div id="login-signup-form">
-        <h3><%= i18n.loginsignup_welcome_message %></h3>
-        <div><%= i18n.loginsignup_welcome_lede %></div>
+    <script type="text/template" id="welcome-template">
+      <div id="welcome">
+        <h3><%= i18n.welcome_title %></h3>
+        <div class="lede"><%= i18n.welcome_lede %></div>
         <hr>
-        <h4>Create a conversation room</h4>
+        <div id="button_group">
+          <h4><%= i18n.welcome_nowwhat %></h4>
+          <a class="btn" id="newprivatebutton" href="#"><%= i18n.welcome_newprivatebutton %></a>
+          <a class="btn" id="newpublicbutton" href="#"><%= i18n.welcome_newpublicbutton %></a>
+          <form id="newpublicform" class="sub-btn">
+            <input type="text" id="newpublicinput" placeholder="Name of the room">
+            <input type="submit" value="Go!">
+          </form>
+          <a class="btn" id="seepublicbutton" href="#"><%= i18n.welcome_seepublicbutton %></a>
+          <ul id="seepubliclist" class="sub-btn">
+          </ul>
+        </div>
       </div>
     </script>
 

@@ -25,10 +25,48 @@ var idleBottomBar = function(){
   $('#bottom-bar').html((keepSpacebarPressed ? i18n.bottombar_hold_space : i18n.bottombar_hit_space)+ " ("+recognition.lang+")");
 }
 
-/* Le login / signup form */
+/* Initialization of a room */
+var showRoom = function(roomID) {
+  /* Setting the bits of interface in place */
+  idleBottomBar();
+  $('#comment-icon').html(i18n.comment_invite);
 
+  /* Changing the URL */
+  window.location = '#'+roomID;
+
+  /* And setting the focus, for the glory to happen */
+  $('#spacebar-listening').focus();
+}
+
+/* The welcome aside */
 var showWelcome = function(){
-  $('aside').html(_.template($('#welcome').html(), {}));
+  $('aside').html(_.template($('#welcome-template').html(), {}));
+  $('#newprivatebutton').click(function(e){
+    showRoom(uuid.v1());
+    e.preventDefault();
+  });
+  $('#newpublicbutton').click(function(e){
+    $(this).addClass("active");
+    $('#newpublicform').slideDown('fast');
+    $('#seepublicbutton').removeClass('active');
+    $('#seepubliclist').slideUp('fast');
+    e.preventDefault();
+  });
+  $('#newpublicform').submit(function(e){
+    showRoom($('#newpublicinput').val());
+    e.preventDefault();
+  });
+  $('#seepublicbutton').click(function(e){
+    $('#seepubliclist').empty();
+    ['foo', 'bar'].forEach(function(item){
+      $('#seepubliclist').append('<li><a href="#'+item+'">'+item+'</a> <span>→</span></li>')
+    });
+    $(this).addClass("active");
+    $('#seepubliclist').slideDown('fast');
+    $('#newpublicbutton').removeClass('active');
+    $('#newpublicform').slideUp('fast');
+    e.preventDefault();
+  });
 }
 
 /* Initialization of all the various needed stuff */
@@ -85,12 +123,12 @@ var initApp = function() {
       });
     }
 
-    /* Setting the bits of interface in place */
-    idleBottomBar();
-    $('#comment-icon').html(i18n.comment_invite);
-
-    /* And setting the focus, for the glory to happen */
-    $('#spacebar-listening').focus();
+    if (window.location.hash) {
+      showRoom(window.location.hash.substring(1));
+    }
+    else {
+      showWelcome();
+    }
 
   });
 
