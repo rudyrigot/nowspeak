@@ -8,7 +8,7 @@ var Views = {
 	},
 
 	/* Initialization of a room */
-	showRoom : function(roomID) {
+	room : function(roomID) {
 	  /* Changing the URL */
 	  window.location = '#'+roomID;
 
@@ -22,12 +22,10 @@ var Views = {
 	},
 
 	/* The welcome aside */
-	showWelcome : function(){
+	welcome : function(){
 	  $('aside').html(_.template($('#welcome-template').html(), {}));
 	  $('#newprivatebutton').click(function(e){
-	    var roomName = uuid.v1();
-	    firebaseRootRef.child('PrivateRooms').child(roomName).set({'name' : roomName, 'created' : new Date().getTime() });
-	    Views.showRoom(roomName);
+	  	Controllers.newPrivateRoom();
 	    e.preventDefault();
 	  });
 	  $('#newpublicbutton').click(function(e){
@@ -39,15 +37,14 @@ var Views = {
 	  });
 	  $('#newpublicform').submit(function(e){
 	    var roomName = getSlug($('#newpublicinput').val());
-	    currentRoomRef = Room.update(roomName);
-	    Views.showRoom(roomName);
+	    Controllers.room(roomName);
 	    e.preventDefault();
 	  });
 	  $('#seepublicbutton').click(function(e){
 	    if (!$(this).hasClass("already-listening")) {
 	      firebaseRootRef.child('Rooms').on('child_added', function(snapshot){
 	        var roomName = snapshot.val().name;
-	        $('#seepubliclist').append('<li><a href="javascript:currentRoomRef=Room.update(\''+roomName+'\'); Views.showRoom(\''+roomName+'\')">'+roomName+'</a> <span class="ago">('+moment(snapshot.val().latest).fromNow()+')</spam> <span>→</span></li>')
+	        $('#seepubliclist').append('<li><a href="javascript:Controllers.room(\''+roomName+'\')">'+roomName+'</a> <span class="ago">('+moment(snapshot.val().latest).fromNow()+')</spam> <span>→</span></li>')
 	      })
 	    }
 	    $(this).addClass("already-listening");
@@ -61,11 +58,11 @@ var Views = {
 
 	/* Handles recording errors */
 	recordingError : function (error) {
-	/* checking if there's a "human" translation available for the error code */
-	if (error in i18n.error_recording_by_code) {
-	  error = i18n.error_recording_by_code[error];
-	}
-	alert(i18n.error_recording+": "+error);
+		/* checking if there's a "human" translation available for the error code */
+		if (error in i18n.error_recording_by_code) {
+		  error = i18n.error_recording_by_code[error];
+		}
+		alert(i18n.error_recording+": "+error);
 	},
 
 };
