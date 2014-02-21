@@ -1,3 +1,5 @@
+/* CONFIGURATION: variables for administrators to edit, in order to customize their NowSpeak instance */
+
 /* Endpoint of the firebase repository to use */
 var firebaseEndpoint = 'https://resplendent-fire-6048.firebaseio.com/';
 

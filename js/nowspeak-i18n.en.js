@@ -1,3 +1,5 @@
+/* English translation file for NowSpeak */
+
 var i18n_en = {
 	bottombar_hold_space : 'Hold the space bar down, and speak',
 	bottombar_hit_space : 'Hit the spacebar, and speak',

@@ -13,10 +13,13 @@
     <script type="text/javascript" src="bower_components/speakingurl/speakingurl.min.js"></script>
     <script type="text/javascript" src="bower_components/moment/moment.js"></script>
     <script type="text/javascript" src="bower_components/firebase/firebase.js"></script>
-    <script type="text/javascript" src="js/i18n.en.js"></script>
+    <script type="text/javascript" src="js/nowspeak-i18n.en.js"></script>
     <script type="text/javascript" src="js/nowspeak-configuration.js"></script>
-    <script type="text/javascript" src="js/nowspeak.js"></script>
-    <script type="text/javascript" src="js/model-helpers.js"></script>
+    <script type="text/javascript" src="js/nowspeak-helpers.js"></script>
+    <script type="text/javascript" src="js/nowspeak-views.js"></script>
+    <script type="text/javascript" src="js/nowspeak-models.js"></script>
+    <script type="text/javascript" src="js/nowspeak-controllers.js"></script>
+    <script type="text/javascript" src="js/nowspeak-init.js"></script>
   </head>
 
   <body>
@@ -64,7 +67,7 @@
         <hr>
         <p id="exit"><a href=""><%= i18n.users_exitroom %></a></p>
         <hr>
-        <h3><%= i18n.users_title %><%= getRoomName().length == 36 && getRoomName().charAt(8) === '-' && getRoomName().charAt(13) === '-' && getRoomName().charAt(18) === '-' && getRoomName().charAt(23) === '-' ? 'private' : getRoomName() %></h3>
+        <h3><%= i18n.users_title %><%= Helpers.isPrivateRoom() ? 'private' : Helpers.getRoomName() %></h3>
       </div>
     </script>
 

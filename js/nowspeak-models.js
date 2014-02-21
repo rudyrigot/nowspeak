@@ -1,4 +1,4 @@
-/* Those are some helpers to manipulate Firebase references */
+/* MODELS: contains various helpers to help recurrent operations on Firebase references */
 
 var Room = {
 	max_date: new Date(2050,1,1,1,1,1,1).getTime(),
@@ -8,4 +8,4 @@ var Room = {
 		firebaseRootRef.child('Rooms').child(roomName).setWithPriority({'name' : roomName, 'latest' : new Date().getTime() }, Room.max_date - new Date().getTime());
 		return firebaseRootRef.child('Rooms').child(roomName);
 	}
-}
+};
