@@ -29,6 +29,7 @@
     "node-uuid": "1.4.1",
     "speakingurl": "~0.8.4",
     "firebase": "~1.0.6",
-    "moment": "~2.5.1"
+    "moment": "~2.5.1",
+    "jquery-insertinorder": "~0.1.1"
   }
 }
