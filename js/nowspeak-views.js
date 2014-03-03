@@ -15,7 +15,12 @@ var Views = {
 	  /* Setting the bits of interface in place */
 	  Views.idleBottomBar();
 	  $('#comment-icon').html(i18n.comment_invite);
+
 	  $('aside').html(_.template($('#users-template').html(), {}));
+		$('#your_alias_form').submit(function(e){
+			User.update($('#your_alias_text').val());
+			e.preventDefault();
+		});
 
 	  /* And setting the focus, for the glory to happen */
 	  $('#spacebar-listening').focus();
@@ -48,12 +53,6 @@ var Views = {
 	    Controllers.room(roomName);
 	    e.preventDefault();
 	  });
-		/*
-			When people click the "See public room" button, we need to start listening to
-			public room references in Firebase, and insert them in order of their latest
-			interaction (so the most recently accessed are showed at the top)
-		*/
-
 	  $('#seepublicbutton').click(function(e){
 			Room.listen();
 	    $(this).addClass("active");

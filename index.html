@@ -24,8 +24,8 @@
   </head>
 
   <body>
-    <div id="spacebar-listening" tabindex="1">
-      <main>
+    <div id="main-frame">
+      <main class="spacebar-listening" tabindex="1">
         <div id="messages">
           <ul id="messageList">
           </ul>
@@ -69,6 +69,8 @@
         <p id="users-sendurl">↖ <%= i18n.users_sendurl %></p>
         <hr>
         <p id="exit"><a href=""><%= i18n.users_exitroom %></a></p>
+        <hr>
+        <form id="your_alias_form">Your alias:<br><input id="your_alias_text"><input type="submit" value="Update"></form>
         <hr>
         <h3><%= i18n.users_title %><%= Helpers.isPrivateRoom() ? 'private' : Helpers.getRoomName() %></h3>
         <ul id="userList"></ul>

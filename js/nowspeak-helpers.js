@@ -58,7 +58,7 @@ var Helpers = {
     $(function(){
       /* Binding the events to start/stop recording */
       if(keepSpacebarPressed) {
-        $('#spacebar-listening')
+        $('.spacebar-listening')
         .on("keydown", function(e){
           if ((e.keyCode || e.which) == 32){ recognition.start(); }
         })
@@ -67,7 +67,7 @@ var Helpers = {
         });
       }
       else {
-        $('#spacebar-listening').on("keydown", function(e){
+        $('.spacebar-listening').on("keydown", function(e){
           if ((e.keyCode || e.which) == 32){
             if (!currentlyRecording) { recognition.start(); }
             else { recognition.stop(); }

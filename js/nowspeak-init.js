@@ -8,6 +8,9 @@ var currentRoomRef;
 
 /* The current userID */
 var userID;
+var userAlias;
+var userColor;
+var userMessageIDs = [];
 
 /* Keeping the recognition engine in a global variable somewhere */
 var recognition;
