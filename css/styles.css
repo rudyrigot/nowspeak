@@ -162,6 +162,48 @@ aside #users h3 {
 	text-align: center;
 	margin-top: 50px;
 }
+aside #users #userList {
+  padding: 8px 0;
+  list-style-type: none;
+  border-radius: 5px;
+  background-color: white;
+}
+aside #users #userList li {
+  padding: 2px 10px;
+}
+
+/* Message list */
+#messages #messageList {
+  padding: 0 10px;
+  list-style-type: none;
+}
+#messages #messageList li {
+  padding: 5px 10px;
+  margin-bottom: 10px;
+  list-style-type: none;
+  background-color: #fafafa;
+  width: 80%;
+  border-radius: 5px;
+  box-shadow: 0px 0px 3px #888888;
+}
+#messages #messageList li.you {
+  background-color: #eeeeee;
+  float:right;
+}
+#messages #messageList li .message {
+  margin: 0 0 5px;
+}
+#messages #messageList li .user {
+  font-style: italic;
+  font-size: 12px;
+  margin: 0;
+}
+#messages #messageList li .user .bullet {
+  font-style: normal;
+}
+#messages #messageList li .user .alias {
+  font-weight: bold;
+}
 
 /* Comment area */
 #comment-area {
