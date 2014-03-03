@@ -11,6 +11,13 @@ var Controllers = {
     Helpers.initSpeechRecognition();
     currentRoomRef = Room.update(roomName);
     Views.room(roomName);
+    Message.listen();
+  },
+
+  room_sendnewmessage : function() {
+    Message.create($('#temporary-message').html());
+    Views.room_reinitinterimmessage();
+    Views.idleBottomBar();
   },
 
   newPrivateRoom : function(){
@@ -18,6 +25,7 @@ var Controllers = {
     var roomName = uuid.v1();
     currentRoomRef = PrivateRoom.create(roomName);
     Views.room(roomName);
+    Message.listen();
   },
 
   joinPrivateRoom : function(roomName) {

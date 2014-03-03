@@ -21,6 +21,14 @@ var Views = {
 	  $('#spacebar-listening').focus();
 	},
 
+	/* Managing the interim message */
+	room_updateinterimmessage : function(message){
+		$('#temporary-message').html(message);
+	},
+	room_reinitinterimmessage : function(){
+		$('#temporary-message').html('');
+	},
+
 	/* The welcome aside */
 	welcome : function(){
 	  $('aside').html(_.template($('#welcome-template').html(), {}));
@@ -45,30 +53,9 @@ var Views = {
 			public room references in Firebase, and insert them in order of their latest
 			interaction (so the most recently accessed are showed at the top)
 		*/
-		// First, the method to insert a FB reference properly as a DOM element
-		var insertReferenceInOrder = function(snapshot) {
-			var roomName = snapshot.val().name,
-				order = snapshot.val().latest,
-				liStr = '<li data-roomname="'+roomName+'" data-order="'+order+'">'
-					+'<a href="javascript:Controllers.room(\''+roomName+'\')">'+roomName+'</a>'
-					+' <span class="ago">('+moment(snapshot.val().latest).fromNow()+')</span>'
-					+' <span>→</span>'
-					+'</li>';
-			$('#seepubliclist').insertinorder(
-				liStr,
-				order,
-				{ direction: 'desc' }
-			);
-		}
+
 	  $('#seepublicbutton').click(function(e){
-	    if (!$(this).hasClass("already-listening")) {
-	      firebaseRootRef.child('Rooms').on('child_added', insertReferenceInOrder);
-				firebaseRootRef.child('Rooms').on('child_changed', function(snapshot){
-					$("#seepubliclist li[data-roomname="+snapshot.val().name+"]").remove();
-					insertReferenceInOrder(snapshot);
-				});
-	    }
-	    $(this).addClass("already-listening");
+			Room.listen();
 	    $(this).addClass("active");
 	    $('#seepubliclist').slideDown('fast');
 	    $('#newpublicbutton').removeClass('active');

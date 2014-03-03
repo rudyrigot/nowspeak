@@ -43,7 +43,7 @@ var Helpers = {
       for (var i = event.resultIndex; i < event.results.length; ++i) {
         interim += event.results[i][0].transcript;
       }
-      $('#messages').html(interim.replace(/\n\n/g, "<br>").replace(/\n/g, "<br>"));
+      Views.room_updateinterimmessage(interim.replace(/\n\n/g, "<br>").replace(/\n/g, "<br>"));
     }
     recognition.onerror = function(event) {
       Views.recordingError(event.error);
@@ -52,7 +52,7 @@ var Helpers = {
     }
     recognition.onend = function() {
       currentlyRecording = false;
-      Views.idleBottomBar();
+      Controllers.room_sendnewmessage();
     }
 
     $(function(){
