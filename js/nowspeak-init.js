@@ -6,6 +6,9 @@ var firebaseRootRef = new Firebase(firebaseEndpoint);
 /* The reference */
 var currentRoomRef;
 
+/* The current userID */
+var userID;
+
 /* Keeping the recognition engine in a global variable somewhere */
 var recognition;
 

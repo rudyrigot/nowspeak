@@ -47,7 +47,7 @@ var PrivateRoom = {
 
 var Message = {
 	create: function(message) {
-		currentRoomRef.child('Messages').push({ 'message': message, 'date': new Date().getTime() });
+		currentRoomRef.child('Messages').push({ 'message': message, 'date': new Date().getTime(), 'user' : userID });
 	},
 
 	listen: function(){
@@ -55,8 +55,30 @@ var Message = {
 			var date = snapshot.val().date;
 			var liStr = '<li data-order="'+date+'">'
 				+ snapshot.val().message
+				+ ' <small>('+snapshot.val().user+', '+moment(date).fromNow()+')</small>'
 				+ '</li>';
 			$('#messageList').insertinorder(liStr, date);
 		});
 	}
 };
+
+var User = {
+	create: function(){
+		userID = uuid.v1();
+		currentRoomRef.child('Users').child(userID).set({'id' : userID, 'alias' : 'anonymous user', 'latest' : new Date().getTime(), 'color' : 'blue' });
+	},
+
+	update: function(newName){
+		currentRoomRef.child('Users').child(userID).update({ 'alias' : newName, 'latest' : new Date().getTime() });
+	},
+
+	listen: function(){
+		currentRoomRef.child('Users').on('child_added', function(snapshot){
+			var latest = snapshot.val().latest,
+				liStr = '<li id="'+snapshot.val().id+'" data-order="'+latest+'">'
+					+ snapshot.val().alias
+					+ '</li>';
+			$('#userList').insertinorder(liStr, latest, { direction : 'desc' });
+		});
+	}
+}
