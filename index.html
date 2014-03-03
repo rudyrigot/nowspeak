@@ -69,12 +69,16 @@
         <p id="users-sendurl">↖ <%= i18n.users_sendurl %></p>
         <hr>
         <p id="exit"><a href=""><%= i18n.users_exitroom %></a></p>
-        <hr>
-        <form id="your_alias_form">Your alias:<br><input id="your_alias_text"><input type="submit" value="Update"></form>
+        <form id="your_alias_form" action=""><%= i18n.users_aliaschange_label %><br><input id="your_alias_text"><input type="submit" value="<%= i18n.users_aliaschange_submit %>"></form>
         <hr>
         <h3><%= i18n.users_title %><%= Helpers.isPrivateRoom() ? 'private' : Helpers.getRoomName() %></h3>
         <ul id="userList"></ul>
       </div>
+    </script>
+
+    <script type="text/template" id="disconnected">
+      <p><%= i18n.disconnect_message %></p>
+      <p><%= i18n.disconnect_detail %></p>
     </script>
 
 </html>

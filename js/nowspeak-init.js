@@ -2,6 +2,7 @@
 
 /* Firebase initialization */
 var firebaseRootRef = new Firebase(firebaseEndpoint);
+var firebaseConnected = new Firebase(firebaseEndpoint+'.info/connected');
 
 /* The reference */
 var currentRoomRef;

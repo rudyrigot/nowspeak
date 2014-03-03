@@ -57,13 +57,13 @@ var Message = {
 			var date = snapshot.val().date;
 			var liStr = '<li id="'+snapshot.val().id+'" data-order="'+date+'">'
 				+ snapshot.val().message
-				+ ' <small>(<span class="user" data-userid="'+snapshot.val().user+'">'+snapshot.val().alias+'</span>, '+moment(date).fromNow()+')</small>'
+				+ ' <small>(<span class="alias" data-userid="'+snapshot.val().user+'">'+snapshot.val().alias+'</span>, '+moment(date).fromNow()+')</small>'
 				+ '</li>';
 			$('#messageList').insertinorder(liStr, date);
 		});
 		currentRoomRef.child('Messages').on('child_changed', function(snapshot){
 			var id = snapshot.val().id;
-			$('#messageList li#'+id+' .user').html(snapshot.val().alias);
+			$('#messageList li#'+id+' .alias').html(snapshot.val().alias);
 		});
 	}
 };
@@ -77,7 +77,8 @@ var User = {
 		var minutes = now.minutes() < 10 ? "0"+now.minutes() : now.minutes();
 		var am_pm = now.hour()<=12 ? "am" : "pm";
 		userAlias = 'anonymous from '+hour+':'+minutes+am_pm;
-		currentRoomRef.child('Users').child(userID).set({'id' : userID, 'alias' : userAlias, 'latest' : new Date().getTime(), 'color' : userColor, 'connected': true });
+		currentRoomRef.child('Users').child(userID).set({'id' : userID, 'alias' : userAlias, 'latest' : new Date().getTime(), 'color' : userColor});
+		currentRoomRef.child('Users').child(userID).onDisconnect().remove();
 		$('#your_alias_text').val(userAlias);
 	},
 
@@ -94,15 +95,16 @@ var User = {
 			var alias = snapshot.val().alias,
 				latest = snapshot.val().latest,
 				liStr = '<li id="'+snapshot.val().id+'" data-order="'+latest+'">'
-					+ alias
+					+ '<span class="alias">'+alias+'</span>'
 					+ (userID===snapshot.val().id ? '<strong> (you)</strong>' : '')
 					+ '</li>';
 			$('#userList').insertinorder(liStr, latest);
 		});
 		currentRoomRef.child('Users').on('child_changed', function(snapshot){
-			var id = snapshot.val().id;
-			$('#userList li#'+id).html(snapshot.val().alias + (userID===snapshot.val().id ? '<strong> (you)</strong>' : ''));
-			// and when a user disconnects
+			$('#userList li#'+snapshot.val().id+' .alias').html(snapshot.val().alias);
+		});
+		currentRoomRef.child('Users').on('child_removed', function(snapshot){
+			$('#userList li#'+snapshot.val().id).remove();
 		});
 	}
 }

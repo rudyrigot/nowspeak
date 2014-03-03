@@ -14,6 +14,7 @@ var Controllers = {
     Message.listen();
     User.create();
     User.listen();
+    Helpers.listenToSelfDisconnection();
   },
 
   room_sendnewmessage : function() {
@@ -30,6 +31,7 @@ var Controllers = {
     Message.listen();
     User.create();
     User.listen();
+    Helpers.listenToSelfDisconnection();
   },
 
   joinPrivateRoom : function(roomName) {
@@ -38,6 +40,7 @@ var Controllers = {
     Views.room(roomName);
     User.create();
     User.listen();
+    Helpers.listenToSelfDisconnection();
   }
 
 };

@@ -20,6 +20,19 @@ var Helpers = {
     return roomName.length == 36 && roomName.charAt(8) === '-' && roomName.charAt(13) === '-' && roomName.charAt(18) === '-' && roomName.charAt(23) === '-';
   },
 
+  listenToSelfDisconnection : function() {
+    setTimeout(function(){
+      firebaseConnected.on('value', function(snap){
+        if (!snap.val()) {
+          $('body').html(_.template($('#disconnected').html()));
+          setInterval(function(){
+            location.reload();
+          }, 5000);
+        }
+      });
+    }, 10000); // waiting for the Firebase I/O to be up before starting to check on disconnections
+  },
+
   initSpeechRecognition : function() {
 
     if (recognition) return; // was already initialized
