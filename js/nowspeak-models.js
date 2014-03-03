@@ -9,16 +9,10 @@ var Room = {
 	listen: function() {
 		// First, the method to insert a FB reference properly as a DOM element
 		var insertReferenceInOrder = function(snapshot) {
-			var roomName = snapshot.val().name,
-				order = snapshot.val().latest,
-				liStr = '<li data-roomname="'+roomName+'" data-order="'+order+'">'
-					+'<a href="javascript:Controllers.room(\''+roomName+'\')">'+roomName+'</a>'
-					+' <span class="ago">('+moment(snapshot.val().latest).fromNow()+')</span>'
-					+' <span>→</span>'
-					+'</li>';
+			var liStr = _.template($('#room-template').html(), {name: snapshot.val().name, latest: snapshot.val().latest});
 			$('#seepubliclist').insertinorder(
 				liStr,
-				order,
+				snapshot.val().latest,
 				{ direction: 'desc' }
 			);
 		};
@@ -54,12 +48,11 @@ var Message = {
 
 	listen: function(){
 		currentRoomRef.child('Messages').on('child_added', function(snapshot){
-			var date = snapshot.val().date;
-			var liStr = '<li id="'+snapshot.val().id+'" data-order="'+date+'">'
-				+ snapshot.val().message
-				+ ' <small>(<span class="alias" data-userid="'+snapshot.val().user+'">'+snapshot.val().alias+'</span>, '+moment(date).fromNow()+')</small>'
-				+ '</li>';
-			$('#messageList').insertinorder(liStr, date);
+			var liStr = _.template(
+				$('#message-template').html(),
+				{ id: snapshot.val().id, message: snapshot.val().message, date:snapshot.val().date, user: snapshot.val().user, alias: snapshot.val().alias, color: snapshot.val().color }
+			);
+			$('#messageList').insertinorder(liStr, snapshot.val().date);
 		});
 		currentRoomRef.child('Messages').on('child_changed', function(snapshot){
 			var id = snapshot.val().id;
@@ -92,13 +85,11 @@ var User = {
 
 	listen: function(){
 		currentRoomRef.child('Users').on('child_added', function(snapshot){
-			var alias = snapshot.val().alias,
-				latest = snapshot.val().latest,
-				liStr = '<li id="'+snapshot.val().id+'" data-order="'+latest+'">'
-					+ '<span class="alias">'+alias+'</span>'
-					+ (userID===snapshot.val().id ? '<strong> (you)</strong>' : '')
-					+ '</li>';
-			$('#userList').insertinorder(liStr, latest);
+			var liStr = _.template(
+				$('#user-template').html(),
+				{ id: snapshot.val().id, alias: snapshot.val().alias, latest: snapshot.val().latest, color: snapshot.val().color }
+			);
+			$('#userList').insertinorder(liStr, snapshot.val().latest);
 		});
 		currentRoomRef.child('Users').on('child_changed', function(snapshot){
 			$('#userList li#'+snapshot.val().id+' .alias').html(snapshot.val().alias);

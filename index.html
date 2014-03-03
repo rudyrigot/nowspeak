@@ -81,4 +81,28 @@
       <p><%= i18n.disconnect_detail %></p>
     </script>
 
+    <script type="text/template" id="room-template">
+      <li data-roomname="<%= name %>" data-order="<%= latest %>">
+        <a href="javascript:Controllers.room('<%= name %>')"><%= name %></a>
+        <span class="ago">(<%= moment(latest).fromNow() %>)</span>
+        <span>→</span>
+      </li>
+    </script>
+
+    <script type="text/template" id="message-template">
+      <li id="<%= id %>" data-order="<%= date %>">
+        <%= message %>
+        <small>
+          (<span class="alias" data-userid="<%= user %>"><%= alias %></span>, <%= moment(date).fromNow() %>)
+        </small>
+      </li>
+    </script>
+
+    <script type="text/template" id="user-template">
+      <li id="<%= id %>" data-order="<%= latest %>">
+        <span class="alias"><%= alias %></span>
+        <%= userID === id ? '<strong> (you)</strong>' : '' %>
+      </li>
+    </script>
+
 </html>
