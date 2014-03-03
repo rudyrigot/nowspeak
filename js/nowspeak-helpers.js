@@ -33,6 +33,15 @@ var Helpers = {
     }, 10000); // waiting for the Firebase I/O to be up before starting to check on disconnections
   },
 
+  getRandomColor : function(){
+    var letters = '0123456789ABCDEF'.split('');
+    var color = '#';
+    for (var i = 0; i < 6; i++ ) {
+        color += letters[Math.round(Math.random() * 15)];
+    }
+    return color;
+  },
+
   initSpeechRecognition : function() {
 
     if (recognition) return; // was already initialized

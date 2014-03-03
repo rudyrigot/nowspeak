@@ -90,16 +90,17 @@
     </script>
 
     <script type="text/template" id="message-template">
-      <li id="<%= id %>" data-order="<%= date %>">
-        <%= message %>
+      <li id="<%= id %>" data-order="<%= date %>" <%= id===userID ? 'class="you"' : '' %>>
+        <%= message %><br>
         <small>
-          (<span class="alias" data-userid="<%= user %>"><%= alias %></span>, <%= moment(date).fromNow() %>)
+          (<span style="color: <%= color %>">&#9635;</span> <span class="alias" data-userid="<%= user %>"><%= alias %></span>, <%= moment(date).fromNow() %>)
         </small>
       </li>
     </script>
 
     <script type="text/template" id="user-template">
       <li id="<%= id %>" data-order="<%= latest %>">
+        <span style="color: <%= color %>">&#9635;</span>
         <span class="alias"><%= alias %></span>
         <%= userID === id ? '<strong> (you)</strong>' : '' %>
       </li>

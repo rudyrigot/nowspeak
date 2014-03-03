@@ -28,6 +28,8 @@ var i18n_en = {
 	users_aliaschange_label : 'Change your alias:',
 	users_aliaschange_submit : 'Update',
 
+	user_defaultname : 'Anonymous user from ',
+
 	disconnect_message : 'It seems like you are experiencing connection issues. Please fix your connection and wait while we\'re trying to reconnect you as a different user.',
 	disconnect_detail : '(Don\'t worry, we\'ll get you up-to-date with what went on when you were away)'
 };

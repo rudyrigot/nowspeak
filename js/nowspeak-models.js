@@ -64,12 +64,12 @@ var Message = {
 var User = {
 	create: function(){
 		userID = uuid.v1();
-		userColor = 'blue';
+		userColor = Helpers.getRandomColor();
 		var now = moment();
 		var hour = now.hour()==0 ? "12" : (now.hour()>12 ? now.hour()-12 : now.hour());
 		var minutes = now.minutes() < 10 ? "0"+now.minutes() : now.minutes();
 		var am_pm = now.hour()<=12 ? "am" : "pm";
-		userAlias = 'anonymous from '+hour+':'+minutes+am_pm;
+		userAlias = i18n.user_defaultname+hour+':'+minutes+am_pm;
 		currentRoomRef.child('Users').child(userID).set({'id' : userID, 'alias' : userAlias, 'latest' : new Date().getTime(), 'color' : userColor});
 		currentRoomRef.child('Users').child(userID).onDisconnect().remove();
 		$('#your_alias_text').val(userAlias);
