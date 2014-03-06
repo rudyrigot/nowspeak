@@ -20,6 +20,7 @@ var Controllers = {
   room_sendnewmessage : function() {
     Message.create($('#temporary-message').html());
     Views.room_reinitinterimmessage();
+    Views.maybeDisplayWarning();
     Views.idleBottomBar();
   },
 

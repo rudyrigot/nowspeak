@@ -28,6 +28,9 @@ var i18n_en = {
 	users_aliaschange_label : 'Change your alias:',
 	users_aliaschange_submit : 'Update',
 
+	warning_body : 'Note that the point of NowSpeak will reach its full potential when <strong>the audio will be sent as well</strong>, allowing messages to be <strong>played back sequentially</strong>, even when they may have been <strong>recorded simultaneously</strong>.',
+	warning_foot : 'If you want to help make that happen (and know getUserMedia well), <a href="https://github.com/rudyrigot/nowspeak/issues/2" target="_blank">come help out</a>!',
+
 	user_defaultname : 'Anonymous user from ',
 
 	disconnect_message : 'It seems like you are experiencing connection issues. Please fix your connection and wait while we\'re trying to reconnect you as a different user.',

@@ -55,6 +55,7 @@ var Message = {
 			);
 			$('#messageList').insertinorder(liStr, snapshot.val().date);
 			Helpers.maybeStickToBottom();
+			Views.maybeDisplayWarning();
 		});
 		currentRoomRef.child('Messages').on('child_changed', function(snapshot){
 			var id = snapshot.val().id;

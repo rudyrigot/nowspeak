@@ -21,6 +21,10 @@ var Views = {
 			User.update($('#your_alias_text').val());
 			e.preventDefault();
 		});
+		$('#warning #close').click(function(e){
+			$('#warning').slideUp();
+			e.preventDefault();
+		});
 
 	  /* And setting the focus, for the glory to happen */
 	  $('#spacebar-listening').focus();
@@ -35,6 +39,14 @@ var Views = {
 	room_reinitinterimmessage : function(){
 		$('#temporary-message').hide();
 		$('#temporary-message').html('');
+	},
+
+	/* Managing the warning */
+	maybeDisplayWarning : function () {
+		if (!wasDisplayedWarning) {
+			$('#warning').slideDown();
+			wasDisplayedWarning = true;
+		}
 	},
 
 	/* The welcome aside */

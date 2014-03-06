@@ -16,6 +16,10 @@ var userMessageIDs = [];
 /* Keeping the recognition engine in a global variable somewhere */
 var recognition;
 
+/* Was the warning displayed already? */
+var wasDisplayedWarning = true;
+setTimeout(function(){ wasDisplayedWarning=false; }, 3000);
+
 /* Routing to initiate the app to the right controller */
 $(function(){
 	if (Helpers.requirementsOk()) {

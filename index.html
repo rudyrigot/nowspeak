@@ -71,6 +71,11 @@
         <p id="exit"><a href=""><%= i18n.users_exitroom %></a></p>
         <form id="your_alias_form" action=""><%= i18n.users_aliaschange_label %><br><input id="your_alias_text"><input type="submit" value="<%= i18n.users_aliaschange_submit %>"></form>
         <hr>
+        <div id="warning" style="display: none;">
+          <a href="#" id="close">✗</a>
+          <p><%= i18n.warning_body %></p>
+          <p><%= i18n.warning_foot %></p>
+        </div>
         <h3><%= i18n.users_title %><%= Helpers.isPrivateRoom() ? 'private' : Helpers.getRoomName() %></h3>
         <ul id="userList"></ul>
       </div>
