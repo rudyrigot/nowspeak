@@ -44,6 +44,7 @@ var Message = {
 		var messageID = uuid.v1();
 		currentRoomRef.child('Messages').child(messageID).set({ 'id': messageID, 'message': message, 'date': new Date().getTime(), 'user' : userID, 'alias' : userAlias, 'color' : userColor });
 		userMessageIDs.push(messageID);
+		Helpers.forceStickToBottom();
 	},
 
 	listen: function(){
@@ -53,6 +54,7 @@ var Message = {
 				{ id: snapshot.val().id, message: snapshot.val().message, date:snapshot.val().date, user: snapshot.val().user, alias: snapshot.val().alias, color: snapshot.val().color }
 			);
 			$('#messageList').insertinorder(liStr, snapshot.val().date);
+			Helpers.maybeStickToBottom();
 		});
 		currentRoomRef.child('Messages').on('child_changed', function(snapshot){
 			var id = snapshot.val().id;

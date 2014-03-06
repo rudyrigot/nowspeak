@@ -30,6 +30,7 @@ var Views = {
 	room_updateinterimmessage : function(message){
 		$('#temporary-message').show();
 		$('#temporary-message').html(message);
+		Helpers.forceStickToBottom();
 	},
 	room_reinitinterimmessage : function(){
 		$('#temporary-message').hide();

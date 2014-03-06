@@ -42,6 +42,20 @@ var Helpers = {
     return color;
   },
 
+  /* stick to bottom, but only if we're 100 px from the bottom */
+  maybeStickToBottom : function(){
+    var actualOffset = $('#messages').scrollTop();
+    if (actualOffset + document.getElementById('messages').offsetHeight - document.getElementById('messages').scrollHeight > -100) {
+      Helpers.forceStickToBottom();
+    }
+  },
+
+  /* send to bottom now, whatever happens */
+  forceStickToBottom : function() {
+    var actualOffset = document.getElementById('messages').scrollHeight - document.getElementById('messages').offsetHeight;
+    $('#messages').scrollTop(actualOffset);
+  },
+
   initSpeechRecognition : function() {
 
     if (recognition) return; // was already initialized
