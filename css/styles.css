@@ -6,6 +6,11 @@ html, body, #main-frame {
     margin: 0;
     overflow: hidden;
 }
+.clearfix:after {
+  content: "";
+  display: table;
+  clear: both;
+}
 #main-frame {
 	display: flex;
 	flex-direction: row;
@@ -176,6 +181,7 @@ aside #users #userList li {
 #messages #messageList {
   padding: 0 10px;
   list-style-type: none;
+  margin-bottom: 0;
 }
 #messages #messageList li {
   padding: 5px 10px;
@@ -187,7 +193,6 @@ aside #users #userList li {
   box-shadow: 0px 0px 3px #888888;
 }
 #messages #messageList li.you {
-  background-color: #eeeeee;
   float:right;
 }
 #messages #messageList li .message {
@@ -204,11 +209,21 @@ aside #users #userList li {
 #messages #messageList li .user .alias {
   font-weight: bold;
 }
+#temporary-message {
+  clear: both;
+  float: right;
+  width: 80%;
+  background-color: black;
+  color: white;
+  padding: 5px 10px;
+  border-radius: 5px;
+  margin: 0 10px;
+}
 
 /* Comment area */
 #comment-area {
 	position:absolute;
-	bottom: 10px;
+	bottom: 0;
 	right: 30%;
 	padding: 5px 10px;
 	background-color: #e0e0e0;

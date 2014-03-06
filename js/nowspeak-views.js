@@ -28,9 +28,11 @@ var Views = {
 
 	/* Managing the interim message */
 	room_updateinterimmessage : function(message){
+		$('#temporary-message').show();
 		$('#temporary-message').html(message);
 	},
 	room_reinitinterimmessage : function(){
+		$('#temporary-message').hide();
 		$('#temporary-message').html('');
 	},
 
