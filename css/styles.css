@@ -60,7 +60,7 @@ a.btn:active, a.btn.active {
 #bottom-bar {
 	text-align: center;
 	font-weight: bold;
-	padding: 15px 100px 0 0;
+	/* padding: 15px 100px 0 0; The comments feature is pushed back to later */
 }
 #bottom-bar .recording {
 	color: red;
@@ -228,6 +228,7 @@ aside #users #userList li {
 	padding: 5px 10px;
 	background-color: #e0e0e0;
 	border-radius: 10px;
+  display: none; /* the comments feature is pushed back to later */
 }
 #comment-area a {
 	color: black;
