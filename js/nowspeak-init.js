@@ -4,23 +4,24 @@
 var firebaseRootRef = new Firebase(firebaseEndpoint);
 var firebaseConnected = new Firebase(firebaseEndpoint+'.info/connected');
 
-/* The reference */
+/* The Firebase reference that represents the current room */
 var currentRoomRef;
 
-/* The current userID */
+/* The current user, and their specifics */
 var userID;
 var userAlias;
 var userColor;
-var userMessageIDs = [];
+var userMessageIDs = []; // an array of their messages, in order to update the user's alias easily on all of them.
 
 /* Keeping the recognition engine in a global variable somewhere */
 var recognition;
 
-/* Was the warning displayed already? */
+/* Was the warning displayed already? (display it at least 3 seconds after the app was started) */
 var wasDisplayedWarning = true;
 setTimeout(function(){ wasDisplayedWarning=false; }, 3000);
 
-/* Routing to initiate the app to the right controller */
+/* AND NOW, LET'S KICKSTART THE APP ITSELF! */
+/* Depending on the situation, routing to initiate the app to the right controller */
 $(function(){
 	if (Helpers.requirementsOk()) {
 		if (!Helpers.getRoomName()) Controllers.welcome();
