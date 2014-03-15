@@ -20,6 +20,9 @@ var recognition;
 var wasDisplayedWarning = true;
 setTimeout(function(){ wasDisplayedWarning=false; }, 3000);
 
+/* Redirecting to HTTPS if need be */
+if (mustRedirectToHttps()) { window.location = window.location.href.replace('http://', 'https://'); }
+
 /* AND NOW, LET'S KICKSTART THE APP ITSELF! */
 /* Depending on the situation, routing to initiate the app to the right controller */
 $(function(){

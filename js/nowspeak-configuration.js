@@ -11,8 +11,13 @@ var lang = 'en';
 
 /* Keep spacebar pressed while talking? */
 /* If you don't host your app in HTTPS, your users might be continuously prompted for
-permission to use the microphone when they kit the spacebar, so you should keep it at false. */
-var keepSpacebarPressed = false;
+permission to use the microphone when they kit the spacebar, so you should set this at false. */
+var keepSpacebarPressed = true;
 
 /* Google Analytics tracking code */
 var GAnalyticsCode = 'UA-48756055-1';
+
+/* When to redirect to HTTPS */
+var mustRedirectToHttps = function() {
+  return window.location.hostname !== 'localhost' && window.location.protocol === 'http:';
+}

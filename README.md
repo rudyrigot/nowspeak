@@ -2,7 +2,7 @@
 
 If you're tired of large-group conference calls where everyone speaks at the same time, and an awkward latency makes it hard for users to understand each other, NowSpeak could bring a viable solution to your problem.
 
-[**I've set up an instance of NowSpeak on nowspeak.io, you can try it now.**](http://nowspeak.io)
+[**I've set up an instance of NowSpeak on nowspeak.io, you can try it now.**](https://nowspeak.io)
 
 NowSpeak leverages speech recognition, so that:
 
@@ -41,7 +41,7 @@ You can execute the project locally as HTTP by executing `./server.sh`.
 
 ### Deploy
 
-Since NowSpeak requires HTTPS for Google Chrome not to bug you about permissions each time you want to speak, you can host the project on Google App Engine, in order to benefit from a cheap static hosting with HTTPS.
+Since NowSpeak requires HTTPS for Google Chrome not to bug you about permissions each time you want to speak, you can host the project on any cheap solution offering cheap static hosting with HTTPS, such as [Gandi](https://www.gandi.net/). Feel free to [get in touch with me](mailto:rudy.rigot@gmail.com) if you need help setting this up.
 
 ## Contribute
 
