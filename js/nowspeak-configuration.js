@@ -13,3 +13,6 @@ var lang = 'en';
 /* If you don't host your app in HTTPS, your users might be continuously prompted for
 permission to use the microphone when they kit the spacebar, so you should keep it at false. */
 var keepSpacebarPressed = false;
+
+/* Google Analytics tracking code */
+var GAnalyticsCode = 'UA-48756055-1';
