@@ -16,9 +16,8 @@ var userMessageIDs = []; // an array of their messages, in order to update the u
 /* Keeping the recognition engine in a global variable somewhere */
 var recognition;
 
-/* Was the warning displayed already? (display it at least 3 seconds after the app was started) */
-var wasDisplayedWarning = true;
-setTimeout(function(){ wasDisplayedWarning=false; }, 3000);
+/* Was the warning displayed already? */
+var wasDisplayedWarning = false;
 
 /* Redirecting to HTTPS if need be */
 if (mustRedirectToHttps()) { window.location = window.location.href.replace('http://', 'https://'); }

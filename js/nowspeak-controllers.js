@@ -9,6 +9,7 @@ var Controllers = {
 
   /* From the roomName, getting the public room in place */
   room : function(roomName){
+    Helpers.temporarilyPauseWarnings(); // pauses for warnings for 3 seconds, so that the room has time to load without firing the warning
     Helpers.initSpeechRecognition(); // initializing the speech recognition
     currentRoomRef = Room.update(roomName); // retrieving (or creating) the current room in the data store
     Views.room(roomName); // setting up the view for this room
@@ -28,6 +29,7 @@ var Controllers = {
 
   /* Create a new private room from scratch */
   newPrivateRoom : function(){
+    Helpers.temporarilyPauseWarnings(); // pauses for warnings for 3 seconds, so that the room has time to load without firing the warning
     Helpers.initSpeechRecognition(); // initializing the speech recognition
     var roomName = uuid.v1(); // generating a unique identifier
     currentRoomRef = PrivateRoom.create(roomName); // creating the current room in the data store
@@ -40,6 +42,7 @@ var Controllers = {
 
   /* Join an existing private room from its name */
   joinPrivateRoom : function(roomName) {
+    Helpers.temporarilyPauseWarnings(); // pauses for warnings for 3 seconds, so that the room has time to load without firing the warning
     Helpers.initSpeechRecognition(); // initializing the speech recognition
     currentRoomRef = PrivateRoom.update(roomName); // retrieving the current room in the data store
     Views.room(roomName); // setting up the view for this room

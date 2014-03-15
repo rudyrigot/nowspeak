@@ -60,6 +60,12 @@ var Helpers = {
     $('#messages').scrollTop(actualOffset);
   },
 
+  /* Temporarily pause the display of the warning, for 3 seconds */
+  temporarilyPauseWarnings : function(){
+    wasDisplayedWarning = true;
+    setTimeout(function(){ wasDisplayedWarning=false; }, 3000);
+  },
+
   /* Setting in place the whole speech recognition system */
   initSpeechRecognition : function() {
 
