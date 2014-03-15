@@ -21,7 +21,10 @@ var Controllers = {
 
   /* Sending the interim message (currently being composed) as a new message */
   room_sendnewmessage : function() {
-    Message.create($('#temporary-message').html()); // sending it
+    var message = $('#temporary-message').html();
+    if (message.trim().length > 0) { // if the message is not empty
+      Message.create(message); // sending it
+    }
     Views.room_reinitinterimmessage(); // cleaning the interim area
     Views.maybeDisplayWarning(); // if not shown before, display right-column warning now
     Views.idleBottomBar(); // reinit the bottom bar
