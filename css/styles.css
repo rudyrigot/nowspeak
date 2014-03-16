@@ -191,6 +191,7 @@ aside #users #userList li {
   width: 80%;
   border-radius: 5px;
   box-shadow: 0px 0px 3px #888888;
+  clear: both;
 }
 #messages #messageList li.you {
   float:right;

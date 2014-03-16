@@ -111,10 +111,10 @@ var Helpers = {
       if(keepSpacebarPressed) { // if in configuration, it is expressed that the space bar should be kept pressed
         $('.spacebar-listening')
         .on("keydown", function(e){
-          if ((e.keyCode || e.which) == 32){ recognition.start(); }
+          if ((e.keyCode || e.which) == 32){ if (!currentlyRecording) { recognition.start(); } }
         })
         .on("keyup", function(e){
-          if ((e.keyCode || e.which) == 32){ recognition.stop(); }
+          if ((e.keyCode || e.which) == 32){ if (currentlyRecording) { recognition.stop(); } }
         });
       }
       else { // if the space bar should not be kept pressed
