@@ -29,7 +29,7 @@ var Views = {
 		});
 
 	  /* And setting the focus, for the glory to happen */
-	  $('#spacebar-listening').focus();
+	  $('.spacebar-listening').focus();
 	},
 
 	/* Managing the interim message (the one that updates while the user is speaking) */

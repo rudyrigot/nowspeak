@@ -102,7 +102,7 @@ var User = {
 			currentRoomRef.child('Messages').child(messageID).update({'alias' : newAlias}); // update the user's messages in Firebase
 		});
 		userAlias = newAlias; // changing the global variable
-		$('#spacebar-listening').focus(); // And setting the focus again
+		$('.spacebar-listening').focus(); // And setting the focus again
 	},
 
 	/* Listening to users, in order to keep the user list up to date */
